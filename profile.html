@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Profile</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="card">
+<h2>My Profile</h2>
+
+<p><b>Username:</b> <span id="username">Loading...</span></p>
+
+<p><b>Email:</b> <span id="email">Loading...</span></p>
+
+<p><b>UID:</b> <span id="uid">Loading...</span></p>
+
+<a href="home.html">
+<button>Back Home</button>
+</a>
+
+</div>
+
+<script type="module">
+
+import { auth } from "./js/firebase.js";
+
+auth.onAuthStateChanged(user=>{
+
+if(user){
+
+document.getElementById("email").innerText =
+user.email;
+
+document.getElementById("uid").innerText =
+user.uid;
+
+document.getElementById("username").innerText =
+user.email.split("@")[0];
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
