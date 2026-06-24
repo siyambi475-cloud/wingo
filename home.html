@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HGZY Demo Dashboard</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+padding:15px;
+}
+
+.header{
+background:#1e293b;
+padding:15px;
+border-radius:12px;
+margin-bottom:15px;
+}
+
+.balance{
+font-size:24px;
+font-weight:bold;
+color:#facc15;
+}
+
+.menu{
+display:flex;
+gap:10px;
+margin-top:10px;
+}
+
+.menu button{
+flex:1;
+padding:10px;
+border:none;
+border-radius:8px;
+background:#334155;
+color:white;
+}
+
+.card{
+background:#1e293b;
+padding:15px;
+border-radius:12px;
+margin-bottom:15px;
+}
+
+.timer{
+font-size:35px;
+font-weight:bold;
+text-align:center;
+color:#22c55e;
+}
+
+.result{
+text-align:center;
+font-size:30px;
+margin-top:10px;
+color:#facc15;
+}
+
+.history-item{
+display:flex;
+justify-content:space-between;
+padding:10px;
+border-bottom:1px solid #334155;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+<h2>HGZY DEMO</h2>
+<div class="balance">Balance: ৳1000</div>
+
+<div class="menu">
+<button onclick="alert('Profile')">Profile</button>
+<button onclick="alert('Friends')">Friends</button>
+<button onclick="logout()">Logout</button>
+</div>
+</div>
+
+<div class="card">
+<h3>30 Seconds Demo Room</h3>
+
+<div class="timer" id="timer">30</div>
+
+<div class="result" id="result">?</div>
+</div>
+
+<div class="card">
+<h3>Last 10 Results</h3>
+<div id="history"></div>
+</div>
+
+<script>
+
+let time = 30;
+let historyList = [];
+
+function generateResult(){
+
+const number = Math.floor(Math.random()*10);
+
+document.getElementById("result").innerText = number;
+
+historyList.unshift(number);
+
+if(historyList.length > 10){
+historyList.pop();
+}
+
+let html = "";
+
+historyList.forEach((item,index)=>{
+
+html += `
+<div class="history-item">
+<span>Round ${historyList.length-index}</span>
+<span>${item}</span>
+</div>
+`;
+
+});
+
+document.getElementById("history").innerHTML = html;
+}
+
+setInterval(()=>{
+
+time--;
+
+document.getElementById("timer").innerText = time;
+
+if(time <= 0){
+
+generateResult();
+
+time = 30;
+
+}
+
+},1000);
+
+function logout(){
+window.location.href="index.html";
+}
+
+</script>
+
+</body>
+</html>
